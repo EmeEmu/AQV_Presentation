@@ -1,0 +1,831 @@
+@import url(./dist/theme/fonts/source-sans-pro/source-sans-pro.css);
+section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
+  color: #fff;
+}
+
+/*********************************************
+ * GLOBAL STYLES
+ *********************************************/
+:root {
+  --r-background-color: #fff;
+  --r-main-font: Source Sans Pro, Helvetica, sans-serif;
+  --r-main-font-size: 42px;
+  --r-main-color: #222;
+  --r-block-margin: 20px;
+  --r-heading-margin: 0 0 20px 0;
+  --r-heading-font: Source Sans Pro, Helvetica, sans-serif;
+  --r-heading-color: #222;
+  --r-heading2-color: #444; /* slightly lighter for subtitles */
+  --r-heading-line-height: 1.2;
+  --r-heading-letter-spacing: normal;
+  --r-heading-text-transform: none;
+  --r-heading-text-shadow: none;
+  --r-heading-font-weight: 600;
+  --r-heading1-text-shadow: none;
+  --r-heading1-size: 1.5em;
+  --r-heading2-size: 1.0em;
+  --r-heading3-size: 1.3em;
+  --r-heading4-size: 1em;
+  --r-code-font: monospace;
+  --r-link-color: #2a76dd;
+  --r-link-color-dark: rgb(30.7720647773, 99.5566801619, 192.7779352227);
+  --r-link-color-hover: rgb(73.95, 138.55, 226.1);
+  --r-selection-background-color: rgb(95.25, 152.25, 229.5);
+  --r-selection-color: #fff;
+  --r-overlay-element-bg-color: 0, 0, 0;
+  --r-overlay-element-fg-color: 240, 240, 240;
+  /* Header positioning (academic layout) */
+  --r-header-top: -10px;
+  --r-header-left: 2px;
+  --r-header-right: 36px;
+  --r-header-gap: 10px;
+  /* Floating environment defaults */
+  --floating-top: auto;     /* e.g., 10% */
+  --floating-right: auto;   /* e.g., 5%  */
+  --floating-bottom: auto;  /* e.g., 0   */
+  --floating-left: auto;    /* e.g., 15% */
+  --floating-w: 320px;      /* fixed width */
+  --floating-h: 200px;      /* fixed height */
+  --floating-bg: transparent; /* set a color while designing */
+  --floating-border-color: rgba(0,0,0,0.25);
+  --floating-border-style: dashed;
+  --floating-border-width: 1px;
+  --floating-radius: 8px;
+  --floating-padding: 12px;
+  --floating-z: 5;
+}
+
+
+
+.reveal-viewport {
+  background: #fff;
+  background-color: var(--r-background-color);
+}
+
+.reveal {
+  font-family: var(--r-main-font);
+  font-size: var(--r-main-font-size);
+  font-weight: normal;
+  color: var(--r-main-color);
+}
+
+.reveal ::selection {
+  color: var(--r-selection-color);
+  background: var(--r-selection-background-color);
+  text-shadow: none;
+}
+
+.reveal ::-moz-selection {
+  color: var(--r-selection-color);
+  background: var(--r-selection-background-color);
+  text-shadow: none;
+}
+
+.reveal .slides section,
+.reveal .slides section > section {
+  line-height: 1.3;
+  font-weight: inherit;
+  min-height: 100% !important; /* https://github.com/hakimel/reveal.js/issues/180#issuecomment-173543708 */
+}
+
+/*********************************************
+ * HEADERS
+ *********************************************/
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  margin: var(--r-heading-margin);
+  color: var(--r-heading-color);
+  font-family: var(--r-heading-font);
+  font-weight: var(--r-heading-font-weight);
+  line-height: var(--r-heading-line-height);
+  letter-spacing: var(--r-heading-letter-spacing);
+  text-transform: var(--r-heading-text-transform);
+  text-shadow: var(--r-heading-text-shadow);
+  word-wrap: break-word;
+}
+
+.reveal h1 {
+  font-size: var(--r-heading1-size);
+}
+
+.reveal h2 { font-size: var(--r-heading2-size) !important; color: var(--r-heading2-color); }
+
+.reveal h3 {
+  font-size: var(--r-heading3-size);
+}
+
+.reveal h4 {
+  font-size: var(--r-heading4-size);
+}
+
+.reveal h1 {
+  text-shadow: var(--r-heading1-text-shadow);
+}
+
+/*********************************************
+ * OTHER
+ *********************************************/
+.reveal p {
+  margin: var(--r-block-margin) 0;
+  line-height: 1.3;
+}
+
+/* Remove trailing margins after titles */
+.reveal h1:last-child,
+.reveal h2:last-child,
+.reveal h3:last-child,
+.reveal h4:last-child,
+.reveal h5:last-child,
+.reveal h6:last-child {
+  margin-bottom: 0;
+}
+
+/* Ensure certain elements are never larger than the slide itself */
+.reveal img,
+.reveal video,
+.reveal iframe {
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.reveal strong,
+.reveal b {
+  font-weight: bold;
+}
+
+.reveal em {
+  font-style: italic;
+}
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em;
+}
+
+.reveal ol {
+  list-style-type: decimal;
+}
+
+.reveal ul {
+  list-style-type: disc;
+}
+
+.reveal ul ul {
+  list-style-type: square;
+}
+
+.reveal ul ul ul {
+  list-style-type: circle;
+}
+
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+  display: block;
+  margin-left: 40px;
+}
+
+.reveal dt {
+  font-weight: bold;
+}
+
+.reveal dd {
+  margin-left: 40px;
+}
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: var(--r-block-margin) auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2);
+}
+
+.reveal blockquote p:first-child,
+.reveal blockquote p:last-child {
+  display: inline-block;
+}
+
+.reveal q {
+  font-style: italic;
+}
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: var(--r-block-margin) auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: var(--r-code-font);
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.reveal code {
+  font-family: var(--r-code-font);
+  text-transform: none;
+  tab-size: 2;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+}
+
+.reveal .code-wrapper {
+  white-space: normal;
+}
+
+.reveal .code-wrapper code {
+  white-space: pre;
+}
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.reveal table th {
+  font-weight: bold;
+}
+
+.reveal table th,
+.reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.5em 0.5em;
+  border-bottom: 1px solid;
+}
+
+.reveal table th[align=center],
+.reveal table td[align=center] {
+  text-align: center;
+}
+
+.reveal table th[align=right],
+.reveal table td[align=right] {
+  text-align: right;
+}
+
+.reveal table tbody tr:last-child th,
+.reveal table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.reveal sup {
+  vertical-align: super;
+  font-size: smaller;
+}
+
+.reveal sub {
+  vertical-align: sub;
+  font-size: smaller;
+}
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top;
+}
+
+.reveal small * {
+  vertical-align: top;
+}
+
+.reveal img {
+  margin: var(--r-block-margin) 0;
+}
+
+/*********************************************
+ * LINKS
+ *********************************************/
+.reveal a {
+  color: var(--r-link-color);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.reveal a:hover {
+  color: var(--r-link-color-hover);
+  text-shadow: none;
+  border: none;
+}
+
+.reveal .roll span:after {
+  color: #fff;
+  background: var(--r-link-color-dark);
+}
+
+/*********************************************
+ * Frame helper
+ *********************************************/
+.reveal .r-frame {
+  border: 4px solid var(--r-main-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+.reveal a .r-frame {
+  transition: all 0.15s linear;
+}
+
+.reveal a:hover .r-frame {
+  border-color: var(--r-link-color);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55);
+}
+
+/*********************************************
+ * CLIDE NUMBER
+ *********************************************/
+.reveal .slide-number {
+	font-size: 22px;
+	color: #000;
+	background-color: rgba( 0, 0, 0, 0 );
+}
+
+/*********************************************
+ * NAVIGATION CONTROLS
+ *********************************************/
+.reveal .controls {
+  color: var(--r-link-color);
+}
+
+/*********************************************
+ * PROGRESS BAR
+ *********************************************/
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--r-link-color);
+}
+
+/*********************************************
+ * PRINT BACKGROUND
+ *********************************************/
+@media print {
+  .backgrounds {
+    background-color: var(--r-background-color);
+  }
+}
+
+
+/*********************************************
+ * ACADEMIC HEADER LAYOUT (top-left h1/h2)
+ * - Puts H1 and H2 in the top-left corner
+ * - Adds padding so body content sits below the header area
+ * - Works whether a slide has H1+H2, only H1, or only H2
+ *********************************************/
+
+/* Provide room for the fixed header area and align content left */
+.reveal .slides section,
+.reveal .slides section > section {
+  padding-top: calc(var(--r-header-top) + var(--r-heading1-size) + var(--r-header-gap) + var(--r-heading2-size));
+  padding-left: var(--r-header-left);
+  padding-right: var(--r-header-right);
+}
+
+/* Top-left alignment for headings */
+.reveal h1,
+.reveal h2 {
+  text-align: left;
+}
+
+/* H1 always sits at the very top-left */
+.reveal section > h1:first-child {
+  position: absolute;
+  top: var(--r-header-top);
+  left: var(--r-header-left);
+  margin: 0;
+}
+
+/* If H2 is the first heading on a slide (no H1), place it at the top-left */
+.reveal section > h2:first-child {
+  position: absolute;
+  top: var(--r-header-top);
+  left: var(--r-header-left);
+  margin: 0;
+}
+
+/* When an H2 immediately follows an H1, place it just below the H1 */
+.reveal section > h1:first-child + h2 {
+  position: absolute;
+  top: calc(var(--r-header-top) + var(--r-heading1-size) + var(--r-header-gap));
+  left: var(--r-header-left);
+  margin: 0;
+}
+
+/* Make sure headings stay above other content */
+.reveal h1, .reveal h2 { z-index: 2; }
+
+/* Slightly reduce top padding on slides that only have a single H1 or H2 to avoid excessive whitespace */
+.reveal section:has(> h1:first-child):not(:has(> h1 + h2)) {
+  padding-top: calc(var(--r-header-top) + var(--r-heading1-size) + var(--r-header-gap));
+}
+.reveal section:has(> h2:first-child):not(:has(> h1)) {
+  padding-top: calc(var(--r-header-top) + var(--r-heading2-size) + var(--r-header-gap));
+}
+
+/* Print/PDF safety: keep headings positioned correctly */
+@media print {
+  .reveal section > h1:first-child,
+  .reveal section > h2:first-child,
+  .reveal section > h1:first-child + h2 {
+    position: absolute;
+  }
+}
+
+
+
+/* Ensure top-left h2 sizing uses the variable */
+.reveal section > h1:first-child + h2,
+.reveal section > h2:first-child {
+  font-size: var(--r-heading2-size) !important;
+}
+
+
+/*********************************************
+ * FLOATING ENVIRONMENT
+ * - Absolutely positioned container you can place anywhere with % offsets
+ * - Fixed width/height via CSS variables
+ * - Accepts any content (text, images, video, etc.)
+ * - Toggle background/border for layout planning
+ *********************************************/
+
+/* Ensure each slide is the positioning context */
+/* .reveal .slides section, .reveal .slides section > section { position: relative; } */
+
+/* Generic floating container */
+.reveal .floating {
+  position: absolute;
+  box-sizing: border-box;
+  top: var(--floating-top);
+  right: var(--floating-right);
+  bottom: var(--floating-bottom);
+  left: var(--floating-left);
+  width: var(--floating-w);
+  height: var(--floating-h);
+  background: var(--floating-bg);
+  padding: var(--floating-padding);
+  z-index: var(--floating-z);
+  overflow: hidden; /* switch to auto when using .resizable */
+  line-height: 0.2;
+}
+
+/* Development helpers */
+.reveal .floating.debug {
+  --floating-bg: rgba(0,128,255,0.08); 
+  border: var(--floating-border-width) var(--floating-border-style) var(--floating-border-color);
+  border-radius: var(--floating-radius);
+}
+.reveal .floating.resizable { resize: both; overflow: auto; }
+
+/* Make media adapt within the box */
+.reveal .floating img,
+.reveal .floating video,
+.reveal .floating iframe {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.reveal .floating ul,
+.reveal .floating ol{
+  line-height: 1.2;
+}
+
+.reveal .floating p{
+  line-height: 0.01;
+}
+
+/* Development-only slide annotations for reveal.js
+ * Classes:
+ *  - .entry       : small grey text at top-left (how the slide is introduced)
+ *  - .mainmessage : large grey text centered (the main message of the slide)
+ *  - .outlook     : small grey text at bottom-right (how we lead to next slide)
+ *
+ * Drop this file after your main theme so variables like --r-main-font are available.
+ */
+
+/* Base style for all three helpers */
+.reveal .entry,
+.reveal .mainmessage,
+.reveal .outlook {
+  position: absolute;
+  color: #777;
+  font-family: var(--r-main-font, Source Sans Pro, Helvetica, sans-serif);
+  line-height: 1.2;
+  opacity: 0.9;
+  z-index: 10;
+  pointer-events: none; /* don’t interfere with slide interactions */
+}
+
+/* ENTRY — top-left */
+.reveal .entry {
+  top: 10%;
+  left: 2%;
+  font-size: 0.75em;
+  text-align: left;
+}
+
+/* MAIN MESSAGE — centered */
+.reveal .mainmessage {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6em;
+  text-align: center;
+  max-width: 80%;
+}
+
+/* OUTLOOK — bottom-right */
+.reveal .outlook {
+  right: 7%;
+  top: 80%;
+  font-size: 0.75em;
+  text-align: right;
+}
+
+
+
+/*********************************************
+ * CITATIONS (bottom-left container)
+ *********************************************/
+/* Container placed at bottom-left of the slide */
+.reveal .citations {
+  position: absolute;
+  left: 14px;
+  bottom: 54px;
+  max-width: 80%;
+  color: #666;
+  font-size: 0.55em;
+  line-height: 1.25;
+  text-align: left;
+}
+
+/* You can use a <ul class="citations"> or any block with .citations */
+.reveal ul.citations {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;            /* allow auto-wrap onto multiple lines */
+  align-items: baseline;
+  gap: 0.4em;                 /* spacing around separators */
+  white-space: normal;        /* allow wrapping */
+}
+.reveal ul.citations > li {
+  margin: 0;
+  display: inline-flex;
+  align-items: baseline;
+  max-width: 100%;
+}
+
+/* Structure: <span class="author"></span>, <span class="journal"></span>, <span class="year"></span> */
+.reveal .citations .author { font-style: normal; font-weight: normal; }
+.reveal .citations .journal { font-style: italic; }
+.reveal .citations .year { font-style: italic; }
+
+/* Pipe separators between items */
+/* Pipe separators between items (works with wrapping) */
+.reveal ul.citations > li + li { position: relative; }
+.reveal ul.citations > li + li::before {
+  content: "|";
+  opacity: .6;
+  margin: 0 .2em; /* small spacing around pipe */
+}
+
+/* Make each citation optionally clickable without changing look */
+.reveal .citations a,
+.reveal .citations a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+  .r-svg-layers svg {
+    width: 100% !important;  /* fill the container width */
+    height: auto !important; /* keep aspect ratio (needs a viewBox) */
+    display: block;
+  }
+
+
+
+
+
+
+
+/* Title slide layout for reveal.js
+ * Usage:
+ * <section class="title-slide">
+ *   <div class="title-logos">
+ *     <img src="logo1.png" alt="Org 1"/>
+ *     <img src="logo2.png" alt="Org 2"/>
+ *   </div>
+ *   <h1 class="title-main">Your Dissertation Title</h1>
+ *   <div class="title-author">Your Name</div>
+ *   <ul class="title-jury">
+ *     <li><span class="person">Prof. A. Expert</span> — <span class="role">Chair</span>, <span class="aff">University X</span></li>
+ *     <li><span class="person">Dr. B. Reviewer</span> — <span class="role">Rapporteur</span>, <span class="aff">Institute Y</span></li>
+ *     <li><span class="person">Dr. C. Reviewer</span> — <span class="role">Rapporteur</span>, <span class="aff">Lab Z</span></li>
+ *   </ul>
+ *   <div class="title-date">9 October 2025 — Paris</div>
+ * </section>
+ */
+
+:root{
+  /* Spacing & sizing */
+  --ts-padding-x: 48px;           /* horizontal page padding */
+  --ts-padding-top: 128px;         /* distance from top to title area (leaves room for logos) */
+  --ts-gap: 200px;                  /* gap between stacked blocks */
+
+  /* Typography */
+  --ts-title-size: 1.6em;         /* main title size */
+  --ts-author-size: 1.2em;        /* author name size */
+  --ts-jury-size: 0.7em;          /* jury text size */
+  --ts-date-size: 0.9em;          /* date size */
+  --ts-muted: #555;               /* muted grey for meta text */
+
+  /* Logos */
+  --ts-logos-top: 20px;
+  --ts-logo-max-h: 150px;          /* maximum logo height */
+  --ts-logo-gap: 20px;            /* gap between logos */
+
+  /* Section headings & extra blocks */
+  --ts-sec-heading-size: 0.9em;   /* "Supervisors" / "Jury" labels */
+  --ts-sec-heading-weight: 700;
+  --ts-supervisors-size: 0.9em;
+  --ts-supervisors-gap: 50px;
+
+  /* Date placement */
+  --ts-date-bottom: 24px;         /* distance from bottom edge for date */
+}
+
+
+/* Ensure the title slide isn't affected by custom top-left heading rules */
+/* .reveal section.title-slide { position: relative; padding: 0 var(--ts-padding-x); } */
+.reveal section.title-slide > h1.title-main { position: static !important; }
+.reveal section.title-slide h1, 
+.reveal section.title-slide h2 { text-align: center; text-transform: none; }
+
+/* Logos row at the very top */
+.reveal section.title-slide .title-logos{
+  position: absolute;
+  top: var(--ts-logos-top);
+  left: var(--ts-padding-x);
+  right: var(--ts-padding-x);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center row; switch to space-between with .spread */
+  gap: var(--ts-logo-gap);
+}
+.reveal section.title-slide .title-logos.spread{ justify-content: space-between; }
+.reveal section.title-slide .title-logos img{
+  max-height: var(--ts-logo-max-h);
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  margin: 0;
+}
+
+/* Central stacked content */
+.reveal section.title-slide .title-stack{
+  /* optional wrapper if you prefer; otherwise elements may be placed directly */
+  position: relative;
+  top: var(--ts-padding-top);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--ts-gap);
+}
+
+/* Title */
+.reveal section.title-slide .title-main{
+  font-size: var(--ts-title-size);
+  margin: 0;
+}
+
+.reveal section.title-slide .title-sub{
+  font-size: var(--ts-author-size);
+  color: var(--ts-muted);
+  /* margin-top: -50px; */
+}
+
+/* Author */
+.reveal section.title-slide .title-author{
+  font-size: var(--ts-author-size);
+  color: var(--ts-muted);
+}
+
+/* Supervisors */
+.reveal section.title-slide .title-supervisors{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--ts-muted);
+}
+.reveal section.title-slide .title-supervisors .sec-heading{
+  font-size: var(--ts-sec-heading-size);
+  font-weight: var(--ts-sec-heading-weight);
+  letter-spacing: .02em;
+}
+.reveal section.title-slide .title-supervisors .sup-list{
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: var(--ts-supervisors-gap);
+  font-size: var(--ts-supervisors-size);
+}
+.reveal section.title-slide .title-supervisors .sup-list > li{ margin: 0; }
+
+/* Jury block (container with internal heading + list) */
+.reveal section.title-slide .title-jury-block{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--ts-muted);
+}
+.reveal section.title-slide .title-jury-block .sec-heading{
+  font-size: var(--ts-sec-heading-size);
+  font-weight: var(--ts-sec-heading-weight);
+  letter-spacing: .02em;
+}
+
+/* (Legacy) external jury title kept for backward compatibility */
+.reveal section.title-slide .title-jury-title{
+  font-size: var(--ts-sec-heading-size);
+  font-weight: var(--ts-sec-heading-weight);
+  color: var(--ts-muted);
+  margin-top: 6px;
+}
+
+/* Jury list */
+
+.reveal section.title-slide .title-jury{
+  list-style: none;
+  margin: 4px 0 0 0;
+  padding: 0;
+  font-size: var(--ts-jury-size);
+  color: var(--ts-muted);
+  line-height: 1.35;
+}
+/* Each jury entry as a 2-column grid: left=name, right=role+aff (aligned right) */
+.reveal section.title-slide .title-jury > li{
+  margin: 0.15em 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  column-gap: 76px;
+}
+.reveal section.title-slide .title-jury .person{ font-weight: 600; color: inherit; text-align: left; }
+.reveal section.title-slide .title-jury .meta{ text-align: right; }
+.reveal section.title-slide .title-jury .role{ font-style: italic; }
+.reveal section.title-slide .title-jury .aff{ font-style: normal; }
+
+/* Optional two-column jury layout on wide titles */
+/* Optional two-column jury layout on wide titles */
+.reveal section.title-slide .title-jury.cols-2{
+  column-count: 2;
+  column-gap: 40px;
+}
+
+
+/* Date (bottom of slide) */
+.reveal section.title-slide .title-date{
+  position: absolute;
+  left: var(--ts-padding-x);
+  right: var(--ts-padding-x);
+  bottom: var(--ts-date-bottom);
+  text-align: center;
+  font-size: var(--ts-date-size);
+  color: var(--ts-muted);
+  margin: 0;
+}
+
+/* Dark background tuning */
+section.has-dark-background.title-slide .title-author,
+section.has-dark-background.title-slide .title-supervisors,
+section.has-dark-background.title-slide .title-jury-block,
+section.has-dark-background.title-slide .title-jury,
+section.has-dark-background.title-slide .title-date{ color: rgba(255,255,255,0.85); }
+
+/* Print tweaks */
+@media print {
+  .reveal section.title-slide .title-logos{ position: static; justify-content: space-between; margin-bottom: 16px; }
+  .reveal section.title-slide .title-stack{ top: 0; }
+  .reveal section.title-slide .title-date{ position: static; margin-top: 12px; }
+}

@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>AQV Presentation</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="theme.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+
+<section class="title-slide">
+  <div class="title-logos">
+	<img src="assets/logos/logos.svg"/>
+  </div>
+
+  <!-- You can wrap content in .title-stack to handle spacing -->
+  <div class="title-stack">
+    <h1 class="title-main">Translating spontaneous brain states from one zebrafish larva to another using a shared latent representation</h1>
+    <h1 class="title-sub">How to DeepFake a fish's brain?</h1>
+    <div class="title-author">Mattéo Dommanget‑Kott</div>
+
+    <!-- <div class="title-supervisors"> -->
+    <!--   <div class="sec-heading">Supervisors</div> -->
+    <!--   <ul class="sup-list"> -->
+    <!--     <li>Volker BORMUTH</li> -->
+    <!--     <li>Georges DEBRÉGEAS</li> -->
+    <!--   </ul> -->
+    <!-- </div> -->
+
+    <!-- <div class="title-jury-block"> -->
+    <!--   <div class="sec-heading">Jury</div> -->
+    <!-- 	<ul class="title-jury"> -->
+    <!--   	<li> -->
+    <!--     	<span class="person">Lilach AVITAN</span> -->
+    <!--     	<span class="meta"><span class="role">Rapportrice</span> -->
+    <!--   	</li> -->
+    <!--   	<li> -->
+    <!--     	<span class="person">Ruben PORTUGUES</span> -->
+    <!--     	<span class="meta"><span class="role">Rapporteur</span> -->
+    <!--   	</li> -->
+    <!--   	<li> -->
+    <!--     	<span class="person">N. Alex CAYCO GAJIC</span> -->
+    <!--     	<span class="meta"><span class="role">Examinatrice</span> -->
+    <!--   	</li> -->
+    <!--   	<li> -->
+    <!--     	<span class="person">Brice BATHELLIER</span> -->
+    <!--     	<span class="meta"><span class="role">Examinateur</span> -->
+    <!--   	</li> -->
+    <!-- 	</ul> -->
+    <!-- </div> -->
+
+    <!-- <ul class="title-jury"> -->
+    <!--   <li><span class="person">Lilach AVITAN</span> — <span class="role">Rapportrice</span>, <span class="aff">Institute Y</span></li> -->
+    <!--   <li><span class="person">Ruben PORTUGUES</span> — <span class="role">Rapporteur</span>, <span class="aff">Lab Z</span></li> -->
+    <!--   <li><span class="person">N. Alex CAYCO GAJIC</span> — <span class="role">Examinatrice</span>, <span class="aff">Institute Y</span></li> -->
+    <!--   <li><span class="person">Brice BATHELLIER</span> — <span class="role">Examinateur</span>, <span class="aff">Lab Z</span></li> -->
+    <!-- </ul> -->
+
+    <!-- <div class="title-date">9 October 2025 — Paris</div> -->
+  </div>
+</section>
+
+
+
+<section> <!-- INTRO SECTION -->
+	<!-- <section> -->
+	<!-- 	<h1> How to compare brain activity across individuals? </h1> -->
+	<!---->
+	<!-- 	<div class="floating fragment" -->
+	<!--     		style=" -->
+	<!-- 				--floating-left: 2.1%; --floating-top: 8.0%; --floating-w: 1782px; --floating-h: 954px; -->
+	<!--     		"> -->
+	<!-- 			<div class="r-svg-layers"  -->
+	<!-- 				data-src="assets/intro/neuro/fMRI_maps.svg"  -->
+	<!-- 				data-base="Layer 1"  -->
+	<!-- 			></div> -->
+	<!-- 	</div> -->
+	<!---->
+	<!-- 	<ul class="citations"> -->
+	<!--  		<li><a href="https://europepmc.org/backend/ptpmcrender.fcgi?accid=PMC5576360&blobtype=pdf" target="_blank" rel="noopener"> -->
+	<!--      		<span class="author">Gordon & Laumann et al</span> <span class="journal">Neuron</span> <span class="year">2017</span> -->
+	<!--    	</a></li> -->
+	<!-- 	</ul> -->
+	<!---->
+	<!-- 	<aside class="notes"> -->
+	<!-- 		<p>Traditionally in neuroscience, when we want to learn something about how the brain works, we usually record the brain of participants while asking them to do something. So for example, in humans, you might record their brains using FMRI while they are watching a movie, moving their hands or feets, or whatever. </p> -->
+	<!-- 		<p>Then you deduce what parts of the brain are related to, for example, moving their feet. But this only gives you information on that particular person. To learn something general about the human brain, we have to do the same experiment in many other participants and average their maps to get the brain regions common to everyone.</p> -->
+	<!-- 		<p>However, this type of analysis doesn't work if you are interested in the brain activity which is not evoked by a particular behaviour or stimulus. </p> -->
+	<!-- 	</aside> -->
+	<!-- </section> -->
+
+
+	<!-- <section> -->
+	<!-- 	<h1> Resolution of the brain </h1> -->
+	<!---->
+	<!-- 	<div class="floating" -->
+	<!--     		style=" -->
+	<!-- 				--floating-left: 1.5%; --floating-top: 14.6%; --floating-w: 1827px; --floating-h: 692px; -->
+	<!--     		"> -->
+	<!-- 			<div class="r-svg-layers"  -->
+	<!-- 				data-src="assets/intro/neuro/network.svg"  -->
+	<!-- 				data-base="Layer 1"  -->
+	<!-- 			></div> -->
+	<!-- 	</div> -->
+	<!---->
+	<!-- 	<div class="floating fragment" -->
+	<!--     		style=" -->
+	<!-- 				--floating-left: -1.8%; --floating-top: 77.2%; --floating-w: 1992px; --floating-h: 137px; -->
+	<!--     		"> -->
+	<!-- 		<p>Spontaneous Activity = intrinsic revisiting of the network</p> -->
+	<!-- 		<p>⠀</p> -->
+	<!-- 		<p>⠀</p> -->
+	<!-- 		<p>⇒ reflects network structure</p> -->
+	<!-- 	</div> -->
+	<!---->
+	<!-- 	<aside class="notes"> -->
+	<!-- 		<p>If you look at the structure of a brain, you'll see that there are brain regions which are more or less connected with each other. Some of them (in red) will be exciting each other, others will be inhibiting each other. And you have this very particular type of connectivity where not everyone is connected to everyone, but you have hubs and recurrent connections. If you look at the brain in more detail, at the much smaller scale of neurons, you're going to see that those circuits of neurons are also connected in this way with groups of neurons that are very strongly connected and then send connections to other groups and circuits that are further away. These small groups of neurons which are tightly connected, are called cell assemblies. And the idea is that throughout your experience, those neurons have learned to activate or deactivate altogether.</p> -->
+	<!-- 		<p>Spontaneous activity happens like all brain activity in this structured network and therefore has to follow the rules of that network. As physicists we like to think about this in terms of energy. The brain can be in different states or configurations, which each correspond to a possible activity pattern of the whole brain. Some configurations would have higher energy, others low energy, and the brain evolves in this landscape by falling into the valleys or jumping over the hills. But you can imagine that some trajectories are easier to follow than others. </p> -->
+	<!-- 		<p>The idea is that SA revisits this landscape without the biases or constraints that would be induced by a task or a stimulus. And therefore it’s helpful if we want to study how the brain is intrinsically organized.</p> -->
+	<!-- 	</aside> -->
+	<!-- </section> -->
+
+	<section>
+		<h1> Recording Brain Activity </h1>
+		<h2>Zebrafish larvae and Light-Sheet Microscopy</h2>
+
+		<div class="floating"
+     		style="
+					--floating-left: -0.7%; --floating-top: 22.6%; --floating-w: 669px; --floating-h: 713px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/intro/zebra/fluo_annotated.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 33.1%; --floating-top: 14.8%; --floating-w: 497px; --floating-h: 919px;
+     		">
+			<video loop="true" src="assets/intro/zebra/LSM.mp4"></video>
+		</div>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 58.3%; --floating-top: 26.9%; --floating-w: 776px; --floating-h: 660px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/intro/zebra/fluo_diag.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<aside class="notes">
+			<p>Instead of humans we use zebrafish which look like this when they are adults, but actually we use them when they are larvae. So when they're around five days old, at that age, they're very small as you can see compared to the grain of rice. But they already have quite a rich behaviour where they can already move around, they can hunt for food or escape from predators.</p>
+			<p>The reason they are so useful to us is because they are almost entirely transparent. So you can see their organs including their brains, which are relatively small and contain about a hundred thousand neurons. But they're vertebrates like us, so some results that we obtain in zebrafish can be then extrapolated to humans or other vertebrates.</p>
+			<p>We can modify them genetically so that each neuron expresses a fluorescent protein, which lets you look at their brain. So here everything in green is the brain.</p>
+		</aside>
+	</section>
+
+	<section>
+		<h1> Functional Brain Recordings </h1>
+		<h2>and Integrative Neuroscience</h2>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 3.3%; --floating-top: 38.2%; --floating-w: 563px; --floating-h: 623px;
+     		">
+			<video loop="true" src="assets/intro/neuro/photoactivation.mp4"></video>
+			<p>Motor Control</p>
+		</div>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 37.6%; --floating-top: 12.0%; --floating-w: 398px; --floating-h: 901px;
+     		">
+			<video loop="true" src="assets/intro/zebra/rls_small.mp4"></video>
+			<p>Sensory Integration</p>
+		</div>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 67.3%; --floating-top: 12.3%; --floating-w: 490px; --floating-h: 900px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/intro/neuro/connectomics.svg" 
+					data-base="Layer 1" 
+				></div>
+     		<p>Connectomics</p>
+		</div>
+
+		<ul class="citations" style="bottom: 100px">
+  		<li><a href="https://doi.org/10.1016/j.cub.2018.10.017" target="_blank" rel="noopener">
+      		<span class="author">Migault et al.</span> <span class="journal">Current Bio.</span> <span class="year">2018</span>
+    	</a></li>
+  		<li><a href="https://www.cell.com/neuron/fulltext/S0896-6273(19)30391-5" target="_blank" rel="noopener">
+      		<span class="author">Kunst et al.</span> <span class="journal">Neuron</span> <span class="year">2019</span>
+    	</a></li>
+		</ul>
+	</section>
+
+	<section>
+		<h1> Spontaneous Brain Activity </h1>
+  	<div class="entry"></div>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 0.0%; --floating-top: 7.8%; --floating-w: 1933px; --floating-h: 772px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/intro/neuro/SA_def.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<div class="floating fragment fade-in-then-out"
+     		style="
+				--floating-left: -0.2%; --floating-top: 25.6%; --floating-w: 1931px; --floating-h: 741px;
+     		">
+			<video loop="true" src="assets/multiRBM/Movie1.mp4"></video>
+		</div>
+
+		<div class="floating fragment"
+     		style="
+				--floating-left: 0.1%; --floating-top: 29.7%; --floating-w: 1917px; --floating-h: 556px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/intro/RBM/configspace.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: -2.4%; --floating-top: 83.3%; --floating-w: 2007px; --floating-h: 120px;
+     		">
+			<p>Spontaneous Activity → P(v) → Brain's Fonctional Organisation</p>
+		</div>
+	</section>
+
+
+</section> <!-- INTRO SECTION -->
+
+
+<section> <!-- RBMs SECTION -->
+
+	<section>
+		<h1> Restricted Boltzmann Machines </h1>
+		<h2> A Probabilistic Model </h2>
+
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: -2.3%; --floating-top: 0.3%; --floating-w: 2005px; --floating-h: 1074px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/intro/RBM/math.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<aside class="notes">
+			<p>Instead I’ve been using a mathematical model of this demon, which is called the Restricted Boltzmann Machine which has been largely developed by Geoffrey Hinton.</p>
+			<p>The idea behind this model is to have two layers, one which represents the neurons on the left and green, where each neuron can be either on or off, and one on the right that represents hidden units, which are equivalent to the arms of the demon, and will provide a representation of the brain activity.</p>
+			<p>Mathematically, the model is described by a joint probability distribution over the neuron and hidden unit configurations. It's a boltman distribution defined from an energy function with 3 terms.</p>
+			<p>The first term describes the tendency of each neuron to be ON or OFF.</p>
+			<p>The second term describes how each hidden unit can be more or less active, but with continuous values.</p>
+			<p>And the last term describes the interactions between the neurons and the hidden units, mediated by weights that connect directly the neurons and the hidden units. So each weight in a continuous value, which can be positive of negative</p>
+			<p>So the entire model is parametrized by those 3 parameters g and U which I won’t discuss much here, and the weights w_i_mu which we’ll discuss in length throughout this presentation.</p>
+		</aside>
+	</section>
+
+	<section>
+		<h1> Restricted Boltzmann Machines </h1>
+		<h2> Representing Brain Activity as a Composition of Cell Assemblies </h2>
+
+		<div class="floating"
+     		style="
+					--floating-left: -1.3%; --floating-top: 63.8%; --floating-w: 240px; --floating-h: 307px;
+     		">
+			<p style="font-size: 0.7em;">Thijs van der Plas</p>
+			<img src="https://research.wur.nl/files-asset/126634744/GetMedia.ashx_id_123483_ts_1743673080?w=160&f=jpg" width="100%"/>
+		</div>
+		<div class="floating"
+     		style="
+					--floating-left: 9.9%; --floating-top: 63.8%; --floating-w: 240px; --floating-h: 314px;
+     		">
+			<p style="font-size: 0.7em;">Jérôme Tubiana</p>
+			<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRd5M6DoNByKuL3ONCGAu2a3WH3Wke_DdHgPQ&s" width="100%"/>
+		</div>
+
+		<div class="floating"
+     		style="
+					--floating-left: 3.5%; --floating-top: 13.0%; --floating-w: 1717px; --floating-h: 941px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/intro/RBM/diag_complex.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<ul class="citations" style="bottom: 100px">
+  		<li><a href="https://elifesciences.org/articles/83139" target="_blank" rel="noopener">
+      		<span class="author">van der Plas & Tubiana et al.</span> <span class="journal">eLife</span> <span class="year">2023</span>
+    	</a></li>
+		</ul>
+
+		<aside class="notes">
+			<p>Amongst many other things, they have shown that the RBM provides a representation of brain activity as a composition of cell assemblies. I'm going to unpack this statement because it's an extremely important one for this presentation.</p>
+			<p>The idea is that RBMs capture the co-activation motifs of neurons by grouping them to the same hidden units. So if we imagine that those five neurons have a tendency of always being active together, then they will all be grouped to this blue hidden unit.</p>
+			<p>And it's the same for other groups of neurons that also tend to co-activate, and each of them will be linked to a hidden unit.</p>
+			<p>And so this creates groups of neurons, throughout the brains, that are each linked to a different hidden unit.</p>
+			<p>An important result from Thijs and Jerome is that these groups describe populations of neurons which are known and look like known functional circuits. For example, this one here looks a lot like pre-motor neurons that control the movement of the tail.</p>
+			<p>An important feature of RBMs is that one neuron can be connected to more than 1 hidden unit, like this one for example.</p>
+		</aside>
+	</section>
+
+</section> <!-- RBMs SECTION -->
+
+
+
+<section> <!-- LaRBM SECTION -->
+
+	<section>
+		<h1> Aligning Representation Across Individuals </h1>
+		<h2> Method : Latent-aligned RBMs</h2>
+
+		<div class="floating"
+     		style="
+					--floating-left: 12.2%; --floating-top: 20.0%; --floating-w: 1395px; --floating-h: 717px;
+     		">
+			<!-- <img src="assets/multiRBM/TS_diag.svg" width="100%"/> -->
+				<div class="r-svg-layers" 
+					data-src="assets/multiRBM/TS_diag.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<aside class="notes">
+			<p>So the method goes like this. We start by training a first RBM on 1 fish like Thijs and Jerome have done before. We call this RBM a teacher, and we will use it to constrain a student RBMs trained on a second fish.</p>
+			<p>The first step is to initialise this student.</p>
+			<p>We know that each hidden unit maps to certain brain regions with certain weights, and so we can map this spatial distribution into the student fish, and use it to reconstruct, in the student, the weights to that particular hidden unit, which means that it now represents the same neuronal population in both fish.</p>
+			<p>And we do this for every hidden unit to reconstruct a full weight matrix. And so with this initialization method, we have built a student RBM, which should have the same representation space as the teacher.</p>
+			<p>However, at this point the student is not at all specialized to the second fish, which is its own individual and therefore needs to be trained.</p>
+		</aside>
+	</section>
+
+	<section>
+		<!-- <h1> Multi-fish Neuronal Model </h1> -->
+		<h1> Aligning Representation Across Individuals </h1>
+		<h2> Method : Latent-aligned RBMs</h2>
+
+		<div class="floating"
+     		style="
+					--floating-left: 86.2%; --floating-top: -1.4%; --floating-w: 236px; --floating-h: 378px;
+     		">
+				<p style="font-size: 0.7em;">Jorge Fernández</p>
+			  <p style="font-size: 0.7em;">⠀</p>
+				<p style="font-size: 0.7em;">de Cossío Díaz</p>
+			<img src="https://www.ipht.fr/wp-content/uploads/2024/09/Jorge.jpeg" width="100%"/>
+		</div>
+
+		<div class="floating"
+     		style="
+					--floating-left: 9.5%; --floating-top: 14.6%; --floating-w: 1491px; --floating-h: 733px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/multiRBM/La_LLH.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+		
+		<div class="floating fragment"
+     		style="
+					--floating-left: 33.4%; --floating-top: 81.0%; --floating-w: 567px; --floating-h: 122px;
+     		">
+     	<ul>
+			<li>Converge faster (×10)</li>
+			<li>Converge more reliably</li>
+     	</ul>
+		</div>
+
+		<aside class="notes">
+			<p>Normally, we would train it by maximazing the likelihood of the neuronal data from the second fish.</p>
+			<p>But if we do this it will slowly drift away from the teacher representation which we don't want. </p>
+			<p>With Jorge we developped a method where we also constrain the student from the teacher model by generating hidden configuration from the teacher and training the student RBM to maximise the probability of those configuration.</p>
+			<p>And we mix those two training objectives into one so the student learns to reproduce both the student neuronal configurations and the teacher hidden cofigurations.</p>
+			<p>What we found is that this training paradigm works extremely well. We can train the student RBMs about 10 times faster than we would the teacher RBMs and they converge way more reliably, meaning that they almost systematically provide good solutions to the problem.</p>
+			<p>Now we need to check two things to make sure that those 2 model do provide the same representation of brain activity.</p>
+		</aside>
+	</section>
+	
+	<section>
+		<!-- <h1> Multi-fish Neuronal Model </h1> -->
+		<h1> Aligning Representation Across Individuals </h1>
+		<h2> Hidden Units map to Stereotypic Neuronal Populations </h2>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 4.0%; --floating-top: 9.0%; --floating-w: 1739px; --floating-h: 962px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/multiRBM/TS_samplemaps.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<aside class="notes">
+			<p>First, we need to look at the weight distributions to check that the cell assemblies in the student do indeed correspond to the cell assemblies in the teacher.</p>
+			<p>Here I'm showing you a bunch of example hidden units where on the left you have the weight distribution in the teacher fish and on the right for the student fish.</p>
+			<p>So for example, at the top here you can see that this hidden unit in the teacher and in the student still represents the same functional ensembles, which most probably corresponds to pre-motor population controlling the movement of the tail to the left.</p>
+			<p>And here this population is probably involved in visual processing.</p>
+			<p>So overall, and even after training, the student hidden units still map to the same functional ensembles.</p>
+			<p></p>
+		</aside>
+	</section>
+
+	<section>
+		<!-- <h1> Multi-fish Neuronal Model </h1> -->
+		<h1> Aligning Representation Across Individuals </h1>
+		<h2> Translating Activity from one Fish to Another </h2>
+
+		<div class="floating"
+     		style="
+					--floating-left: 62.7%; --floating-top: -0.0%; --floating-w: 625px; --floating-h: 263px;
+     		">
+     	<ul>
+			<li>Shared representation space</li>
+			<li>Generative Model</li>
+     	</ul>
+			<p>⠀</p>
+			<p>⇒ Same encoding ?</p>
+			<p>⠀</p>
+			<p>⇒ Translation</p>
+		</div>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 15.2%; --floating-top: 24.0%; --floating-w: 1346px; --floating-h: 797px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/multiRBM/deepfake_diag.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<!-- <div class="floating" -->
+  <!--    		style=" -->
+		<!-- 			--floating-left: 60.2%; --floating-top: 37.1%; --floating-w: 715px; --floating-h: 409px; -->
+  <!--    		"> -->
+		<!-- 	<img src="assets/multiRBM/deepfake_eq.svg" width="100%"/> -->
+		<!-- </div> -->
+
+  	<!-- <div class="entry">bidirectional generative model + same latent space → deepfake</div> -->
+  	<!-- <div class="mainmessage">method → we can translate activity from on fish to the other</div> -->
+  	<!-- <div class="outlook">we can now ask question : "how probable is the activity in the recipient?"</div> -->
+
+		<aside class="notes">
+			<p>Now because this space is shared between those two individuals and because we can generate data from those models, we can start to ask interesting questions like "do both fish encode brain activity the same way". To test this we can try to translate activity from one individual to the other.</p>
+			<p>If we take a neuronal configuration from the teacher, we can get the representation in hidden space using the conditional probability P(h|v) as I showed earlier, transfer this representation to the teacher and reconstruct it as a neuronal configuration in the student using P(v|h). For comparison we’ll also reconstruct it in the teacher’s neuronal space.</p>
+			<p>By doing this translation, we can take activity that was recorded in the teacher and try to reproduce what it would have looked like if it had also been recorded in the student. </p>
+		</aside>
+	</section>
+
+	<section>
+		<!-- <h1> Multi-fish Neuronal Model </h1> -->
+		<h1> Aligning Representation Across Individuals </h1>
+		<h2> Translating Activity from one Fish to Another </h2>
+		<div class="floating"
+     		style="
+					--floating-left: 5.6%; --floating-top: 11.5%; --floating-w: 1677px; --floating-h: 962px;
+     		">
+			<video loop="true" src="assets/multiRBM/Movie3.mp4"></video>
+		</div>
+
+		<aside class="notes">
+			<p>So here I'm showing you on the left the activity that we recorded in the teacher in the middle of the activity that was reconstructed in the teacher, and on the right I'm showing you activity that was translated in the student.</p>
+			<p>So the two brains on the left are the teacher's brain, the brain on the right is the student brain. And the activity that we translated in the student has never really existed in the student, it's completly fake.</p>
+			<p>But as you can see, it still captures most of the large scale structure of the activity in the teacher. And we like to say that this is the first ever deep fake of a zebrafish brain.</p>
+		</aside>
+	</section>
+
+	<section>
+		<!-- <h1> Multi-fish Neuronal Model </h1> -->
+		<h1> Aligning Representation Across Individuals </h1>
+		<h2> Translated Activity is Probable under the Recipient Model </h2>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 10.1%; --floating-top: 19.5%; --floating-w: 1509px; --floating-h: 856px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/multiRBM/deepfake_freeenergy.svg" 
+					data-base="Layer 1" 
+				></div>
+		</div>
+
+		<aside class="notes">
+			<p>We did a lot of different tests to evaluate how realistic this translated activity is, and I'll only present one of them.</p>
+			<p>The idea is to evaluate how probable is this activity in the student model.</p>
+			<p>To do this we use the probability of neuronal configuration according to the RBM P(v). However, this cannot actually be computed, but it can be estimated through what is called the free energy.</p>
+			<p>Here I'm showing you the distribution of free energy for the teacher data evaluated in the teacher model. And as you can see, most data points are very probable, which makes sense as this is how we trained the model.</p>
+			<p>And here is the free energy of configurations reconstructed from the teacher. As you can see they are slightly less probable, which makes sense as the RBM filters out some of the details of the activity.</p>
+			<p>And now if we look at the activity that we translated from the student to the teacher we can see that it is as probable as the reconstructed configurations, and this is true of course when translating the other way around from teacher to student.</p>
+			<p>This means that the representation of the brain activity is truly shared from the student to the teacher because we can translate it from one individual to the other while still maintaining a high probability in both.</p>
+		</aside>
+	</section>
+
+</section> <!-- LARBM SECTION -->
+
+
+
+
+
+<section> <!-- CONCLUSION + END SECTION -->
+	<section>
+		<h1> Conclusion</h1>
+
+		<div class="floating"
+     		style="
+					--floating-left: -0.9%; --floating-top: 6.8%; --floating-w: 951px; --floating-h: 993px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/conclusion.svg" 
+					data-base="Layer 1"
+				></div>
+		</div>
+
+		<div class="floating fragment"
+     		style="
+					--floating-left: 61.6%; --floating-top: 6.9%; --floating-w: 742px; --floating-h: 1048px;
+     		">
+				<div class="r-svg-layers" 
+					data-src="assets/guillaume.svg" 
+					data-base="Layer 1"
+				></div>
+		</div>
+
+		<aside class="notes">
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+			<p></p>
+		</aside>
+	</section>
+
+
+</section> <!-- CONCLUSION + END SECTION -->
+
+<section>
+
+</section>
+
+
+
+<section> <!-- SUPPS SECTION -->
+	<section>
+		<h1> Supp : Voxelization Method </h1>
+		<img src="assets/supps/vox1.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : Voxelization Results </h1>
+		<img src="assets/supps/vox2.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : Compositionality </h1>
+		<img src="assets/supps/compositionality.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : RBM methods </h1>
+		<img src="assets/supps/RBMmethods.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : LightSheet Microscopy </h1>
+		<img src="assets/supps/LS.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : Student's lower weights </h1>
+		<img src="assets/supps/small_weights.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : Student Statistics & Couplings </h1>
+		<img src="assets/supps/TSstats.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : Student init+training + hidden correlations </h1>
+		<img src="assets/supps/student.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : Binary Layer Composition </h1>
+		<img src="assets/supps/bin_composition.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : Translation Statistics & Mapping methods </h1>
+		<img src="assets/supps/trans_stats.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : nRMSE </h1>
+		<img src="assets/supps/nrmse.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+	<section>
+		<h1> Supp : RBM vs. PCA/ICA/VAEs </h1>
+		<img src="assets/supps/PCA_ICA1.svg" width="100%" style="position:relative; top:-20px;"/>
+		<aside class="notes">
+			<p>PCA/ICA/VAEs are excellent for dimensionality reduction or disentangling under specific constraints, but they either assume linear/independent factors (PCA/ICA) or impose a prior encoder/latent family (VAE).</p>
+			<p>PCA enforces orthogonal directions capturing variance; ICA enforces statistical independence of components. Great for denoising/low-rank structure; less natural for overlapping assemblies or correlated motifs (decorrelation/independence can merge real modes).</p>
+			<p>Directed latent-variable model with a prescribed encoder/latent prior (typically Gaussian); powerful for generation, but the latent statistics are imposed a priori, not learned by maximum entropy, and matching pairwise statistics can be difficult in practice for shallow VAEs.</p>
+			<p>Weight structure: cRBM weights are sparse with more large-magnitude links than PCA; PCA shows predominance of small weights → less crisp assemblies</p>
+			<p>Decorrelate/independence constraints can merge real modes: in synthetic proteins, PCA/ICA produce delocalized, mixed modes; RBM separates correlated motifs that co-occur but aren’t independent.</p>
+			<p>VAE models do not fit second-order statistics.</p>
+			<p>Functional connectivity & perturbations</p>
+			<p>ICA can separate sources but lacks this generative/perturbative machinery.</p>
+			<p>They’re fine for linear/independent factors, but decorrelation/independence can merge interacting motifs and dilute assemblies</p>
+		</aside>
+	</section>
+	<section>
+		<h1> Supp : RBM vs. PCA/ICA/VAEs </h1>
+		<img src="assets/supps/PCA_ICA2.svg" width="100%" style="position:relative; top:-20px;"/>
+	</section>
+</section> <!-- SUPPS SECTION -->
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/reveal-svg-layers.umd.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script src="plugin/floating-dev-helper.js"></script>
+		<script>
+			Reveal.initialize({
+				width: 1920, height: 1080, minScale:0.2, maxScale:1.8,
+				center: false,
+				controls: false, progress:false,
+				slideNumber: "h.v",
+				hash: true,
+				navigationMode: 'linear',
+				autoPlayMedia: true,
+				transition: 'none',
+				display: "inherit",
+				defaultTiming: 52, // 45min
+				plugins: [ RevealNotes, SvgLayers, RevealZoom, RevealMath.KaTeX],
+			});
+		</script>
+	</body>
+</html>
